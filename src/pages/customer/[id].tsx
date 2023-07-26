@@ -8,13 +8,24 @@ type CustomerPage = {
 function CustomerPage({ customerId }: CustomerPage) {
   const customer = trpc.customer.useQuery({ customerId });
 
-  if (!customer.data) {
+  if (!customer.data && !customer.error) {
     return (
       <div>
         <h1>Loading...</h1>
       </div>
     );
   }
+
+  if (customer.error) {
+    return (
+      <div>
+        <h1>Customer</h1>
+        <p>Error</p>
+        <p>{customer.error.message}</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <h1>Customer</h1>
