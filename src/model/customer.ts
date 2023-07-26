@@ -9,13 +9,21 @@ type Customer = {
 export async function getFakeCustomer({
   customerId,
 }: CustomerInput): Promise<Customer> {
-  if (customerId !== 666) {
-    throw new Error("customerId not found");
+  if (customerId === 1) {
+    return {
+      customerId: 1,
+      firstName: "Bon",
+      lastName: "Scott",
+    };
   }
 
-  return {
-    customerId: 666,
-    firstName: "Angus",
-    lastName: "Young",
-  };
+  if (customerId === 666) {
+    return {
+      customerId: 666,
+      firstName: "Angus",
+      lastName: "Young",
+    };
+  }
+
+  throw new Error("customerId not found");
 }
