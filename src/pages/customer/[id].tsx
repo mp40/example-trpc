@@ -1,53 +1,26 @@
 import { GetServerSideProps } from "next";
-import { trpc } from "../../utils/trpc";
+import CustomerComponent from "../../components/Customer";
 
 type CustomerPage = {
   customerId: number;
 };
 
 function CustomerPage({ customerId }: CustomerPage) {
-  const customer = trpc.customer.useQuery({ customerId });
-
-  if (!customer.data && !customer.error) {
-    return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
-    );
-  }
-
-  if (customer.error) {
-    return (
-      <div>
-        <h1>Customer</h1>
-        <p>Error</p>
-        <p>{customer.error.message}</p>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <h1>Customer</h1>
-      <p>{`First name: ${customer.data.firstName}`}</p>
-      <p>{`Last name: ${customer.data.lastName}`}</p>
-    </div>
-  );
+  return <CustomerComponent customerId={customerId} />;
 }
 
 export const getServerSideProps: GetServerSideProps<CustomerPage> = async (
   context
 ) => {
   const id = context.params?.id;
-  if (!id || Array.isArray(id)) {
+  let parsedId: number | undefined = Number(id);
+  if (!id || Array.isArray(id) || isNaN(parsedId)) {
     return { notFound: true };
   }
 
-  const customerId = parseInt(id);
-
   return {
     props: {
-      customerId,
+      customerId: parsedId,
     },
   };
 };
