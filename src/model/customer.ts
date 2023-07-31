@@ -1,10 +1,5 @@
+import { Customer } from "../db";
 import { GetCustomerInput } from "../pages/api/trpc/[trpc]";
-
-type Customer = {
-  customerId: number;
-  firstName: string;
-  lastName: string;
-};
 
 export async function getFakeCustomer({
   customerId,
