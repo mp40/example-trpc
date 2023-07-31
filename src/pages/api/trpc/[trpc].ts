@@ -1,6 +1,7 @@
 import * as trpcNext from "@trpc/server/adapters/next";
 import { z } from "zod";
 import { getFakeCustomer } from "../../../model/customer";
+import { createContext } from "../../../server/context";
 import { publicProcedure, router } from "../../../server/trpc";
 
 const customerInputSchema = z.object({ customerId: z.number() });
@@ -21,5 +22,5 @@ export type AppRouter = typeof appRouter;
 // export API handler
 export default trpcNext.createNextApiHandler({
   router: appRouter,
-  createContext: () => ({}),
+  createContext,
 });
