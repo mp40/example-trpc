@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import CustomerComponent from "../../components/Customer";
+import CustomerComponent from "../../../components/Customer";
 
 type CustomerPage = {
   customerId: number;
