@@ -1,4 +1,4 @@
-import { CustomerInput } from "../pages/api/trpc/[trpc]";
+import { GetCustomerInput } from "../pages/api/trpc/[trpc]";
 
 type Customer = {
   customerId: number;
@@ -8,7 +8,7 @@ type Customer = {
 
 export async function getFakeCustomer({
   customerId,
-}: CustomerInput): Promise<Customer> {
+}: GetCustomerInput): Promise<Customer> {
   if (customerId === 1) {
     return {
       customerId: 1,

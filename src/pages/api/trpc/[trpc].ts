@@ -2,14 +2,14 @@ import * as trpcNext from "@trpc/server/adapters/next";
 import { z } from "zod";
 import { getFakeCustomer } from "../../../model/customer";
 import { createContext } from "../../../server/context";
-import { publicProcedure, router } from "../../../server/trpc";
+import { authProcedure, router } from "../../../server/trpc";
 
-const customerInputSchema = z.object({ customerId: z.number() });
-export type CustomerInput = z.infer<typeof customerInputSchema>;
+const getCustomerInputSchema = z.object({ customerId: z.number() });
+export type GetCustomerInput = z.infer<typeof getCustomerInputSchema>;
 
 const appRouter = router({
-  customer: publicProcedure
-    .input(customerInputSchema)
+  getCustomer: authProcedure
+    .input(getCustomerInputSchema)
     .query(async ({ input }) => {
       return await getFakeCustomer(input);
     }),

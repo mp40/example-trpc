@@ -5,7 +5,7 @@ type CustomerComponent = {
 };
 
 function CustomerComponent({ customerId }: CustomerComponent) {
-  const customer = trpc.customer.useQuery({
+  const customer = trpc.getCustomer.useQuery({
     customerId,
   });
 
